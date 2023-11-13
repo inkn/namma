@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-
 const useName = '阿拉雷'
 </script>
-
 <template>
   <a-affix :offsetTop="0">
   <header>
