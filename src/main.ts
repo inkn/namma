@@ -13,12 +13,18 @@ import '@arco-design/web-vue/dist/arco.css';
 import './assets/iconfont/iconfont.css'
 import './assets/iconfont/iconfont.js'
 
-const app = createApp(App)
+import { Chrome, create } from '@ckpack/vue-color';
+
+const app = createApp(App);
 
 app.use(createPinia())
 app.use(router)
 app.use(ArcoVue);
 app.use(ArcoVueIcon);
+app.use(create({
+    components: [Chrome],
+}));
 app.mount('#app')
 
+window.app = app;
 

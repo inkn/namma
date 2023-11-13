@@ -29,11 +29,17 @@ const useName = '阿拉雷'
       </div>
     </header>
   </a-affix>
-  <RouterView />
+  <div style="margin-top: 64px;">
+    <RouterView  />
+  </div>
 </template>
 
 <style scoped>
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 64px;
   padding: 0 100px;
   box-shadow: var(--container-shadow);

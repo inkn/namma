@@ -5,6 +5,10 @@
   font-weight: normal;
 }
 
+body {
+  background-color: #f9f9f9;
+}
+
 a,
 .green {
   text-decoration: none;
