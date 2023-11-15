@@ -81,7 +81,7 @@ const remove = (layer: any) => {
 
 const onLayerIndexChange = () => {
    layerInfo.value.list.forEach((l: any) => {
-      l.sendToBack();
+      l.bringToFront();
    })
 }
 
