@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import initCanvas from "@/utils/setup.js";
 import { onMounted } from 'vue';
 import { useCanvasStore } from '@/stores/canvas';
-import { Chrome } from '@ckpack/vue-color';
 import Layer from '@/components/Layer.vue';
 import { watch } from 'vue';
 
@@ -16,9 +15,6 @@ const size = ref(12)
 const noShake = ref(true)
 const layer = ref<any>(null)
 
-watch(colors, (val) => {
-  store.setArgs({ toolName: 'pencil', color: colors.value.hex })
-})
 
 onMounted(() => {
   window.app.canvas = canvas.value
@@ -42,6 +38,10 @@ const onShakeChange = () => {
   store.setArgs({ toolName: 'pencil', shake: noShake.value })
 }
 
+const onColorChange = () => {
+  store.setArgs({ toolName: 'pencil', color: colors.value })
+}
+
 </script>
 
 <template>
@@ -62,7 +62,7 @@ const onShakeChange = () => {
       <a-card>
         <div class="options">
           <div class="color-picker">
-            <Chrome v-model="colors" class="color-picker-chrome" @change="onColorChange" />
+            <color-picker class="color-picker-chrome"  v-model:pureColor="colors" pickerType="chrome"  @pureColorChange="onColorChange" isWidget :disableHistory="false"  />
           </div>
           <div class="controls">
             <div class="slider">
