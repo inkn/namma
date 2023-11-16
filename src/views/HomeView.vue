@@ -222,6 +222,11 @@ const goToDetail = (item: any) => {
   flex-wrap: wrap;
 }
 
+
+.item:hover {
+  transform: translateY(-4px);
+}
+
 .item {
   width: 300px;
   height: 360px;
@@ -231,6 +236,8 @@ const goToDetail = (item: any) => {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  transition-property: all;
+
 
   .info {
     position: absolute;

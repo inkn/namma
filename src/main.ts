@@ -14,6 +14,7 @@ import './assets/iconfont/iconfont.css'
 import './assets/iconfont/iconfont.js'
 
 import { Chrome, create } from '@ckpack/vue-color';
+import { EventBus } from './utils/eventBus'
 
 const app = createApp(App);
 
@@ -27,4 +28,5 @@ app.use(create({
 app.mount('#app')
 
 window.app = app;
+window.eventBus = new EventBus();
 

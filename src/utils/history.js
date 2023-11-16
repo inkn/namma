@@ -15,15 +15,19 @@ class History {
     this.history.push(action);
     this.current = this.history.length;
     sessionStorage.vdarw = paper.project.exportJSON();
+    window.eventBus.emit("updateLayers");
+    
   }
   undo() {
     if (this.canUndo()) {
       this.history[--this.current].unexec();
+      window.eventBus.emit("updateLayers");
     }
   }
   redo() {
     if (this.canRedo()) {
       this.history[this.current++].exec();
+      window.eventBus.emit("updateLayers");
     }
   }
   canUndo() {

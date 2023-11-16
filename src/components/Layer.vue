@@ -12,31 +12,37 @@ import draggable from 'vuedraggable'
 
 const layerInfo = ref<any>({ updateTimer: 1, list: [] })
 
+window.layerInfo = layerInfo;
+
 onMounted(() => {
    nextTick(() => {
-      upDateLayers(true)
+      upDateLayers()
    })
+
+   window.eventBus.on("updateLayers", () => {
+      console.log("updateLayers")
+      upDateLayers()
+   })
+
 })
 
 const curActiveLayerId = ref(0)
 
 
-const upDateLayers = (needDely = false) => {
-   setTimeout(() => {
-      layerInfo.value.list.length = 0;
-      paper.project?.layers.forEach((layer: any) => {
-         if (layer.name) {
-            layerInfo.value.list.push(layer);
-         } else {
-            layer.remove();
-         }
+const upDateLayers = () => {
+   layerInfo.value.list.length = 0;
+   paper.project?.layers.forEach((layer: any) => {
+      if (layer.name) {
+         layerInfo.value.list.push(layer);
+      } else {
+         layer.remove();
+      }
 
-      });
-      layerInfo.value.updateTimer++
-      console.log(layerInfo.value)
-      console.log(paper.project)
-      curActiveLayerId.value = paper.project?.activeLayer.id
-   }, needDely ? 200 : 0)
+   });
+   layerInfo.value.updateTimer++
+   console.log(layerInfo.value)
+   console.log(paper.project)
+   curActiveLayerId.value = paper.project?.activeLayer.id
 };
 
 const newLayer = () => {
@@ -49,7 +55,7 @@ const newLayer = () => {
       })
    );
    layer.activate();
-   upDateLayers(true);
+   upDateLayers();
 
 };
 
@@ -95,7 +101,7 @@ defineExpose({
 </script>
 
 <template>
-   <div class="layers">
+   <div class="layers" :key="layerInfo.updateTimer">
       <draggable v-model="layerInfo.list" item-key="id" @change="onLayerIndexChange()">
          <template #item="{ element: item }">
                <div class="layer" :class="{ active: curActiveLayerId === item.id }" @click="activate(item)">
