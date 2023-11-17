@@ -120,41 +120,22 @@ defineExpose({
    overflow-y: auto;
 }
 
-.my-icon {
-   font-size: 20px;
-   margin-left: 10px;
-   cursor: pointer;
-   display: inline-block;
-   width: 1em;
-   height: 1em;
-   color: rgb(78, 89, 105);
-   font-style: normal;
-   vertical-align: -2px;
-   outline: none;
-   stroke: currentColor;
-}
 
 .layer {
    display: flex;
    align-items: center;
    height: 72px;
    margin-top: 16px;
-
+   cursor: pointer;
+   padding-right: 20px;
 }
 
 .layer:first-child {
    margin-top: 0;
 }
-
-.name {
-   width: 310px;
-}
-
-.active {
+.layer.active {
    FONT-VARIANT: JIS04;
    color: rgb(0, 0, 0);
-   /* border: 1px solid rgb(0, 0, 0); */
-   width: 435px;
    flex-shrink: 0;
    border-radius: 8px 8px 0px 0px;
    background: #F8F8F8;

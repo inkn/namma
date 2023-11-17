@@ -91,12 +91,6 @@ onMounted(() => {
     border-radius: 2px;
 }
 
-.layers {
-    width: 100%;
-    height: calc(430px - 80px);
-    overflow-y: auto;
-}
-
 .my-icon {
     font-size: 20px;
     margin-left: 10px;
@@ -111,29 +105,8 @@ onMounted(() => {
     stroke: currentColor;
 }
 
-.layer {
-    display: flex;
-    align-items: center;
-    height: 72px;
-    margin-top: 16px;
-
-}
-
-.layer:first-child {
-    margin-top: 0;
-}
-
 .name {
     width: 300px;
     margin-left: 10px;
-}
-
-.active {
-    FONT-VARIANT: JIS04;
-    color: rgb(0, 0, 0);
-    /* border: 1px solid rgb(0, 0, 0); */
-    flex-shrink: 0;
-    border-radius: 8px 8px 0px 0px;
-    background: #F8F8F8;
 }
 </style>
