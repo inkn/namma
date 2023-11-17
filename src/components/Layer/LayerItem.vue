@@ -43,7 +43,7 @@ const updateSvg = () => {
         viewRef.value.innerHTML = ""
         viewRef.value?.appendChild(layer.value?.lastSvg)
     }
-   
+
 }
 
 onMounted(() => {
@@ -82,12 +82,20 @@ onMounted(() => {
 .v-layer-item-bg {
     width: 72px;
     height: 72px;
-    --square-color: #ccc;
     background-size: 10px 10px;
     background-position: 0 0, 5px 5px;
-    background-image:
-        linear-gradient(45deg, #eee 25%, transparent 0, transparent 75%, #eee 0, #eee),
-        linear-gradient(45deg, #eee 25%, #fff 0, #fff 75%, #eee 0, #eee);
+    background-image: linear-gradient(45deg,
+            var(--square-color) 25%,
+            #0000 25%,
+            #0000 75%,
+            var(--square-color) 75%,
+            var(--square-color)),
+        linear-gradient(45deg,
+            var(--square-color) 25%,
+            #0000 25%,
+            #0000 75%,
+            var(--square-color) 75%,
+            var(--square-color));
     border-radius: 2px;
 }
 

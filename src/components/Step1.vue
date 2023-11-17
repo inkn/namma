@@ -95,9 +95,22 @@ const onColorChange = () => {
   display: block;
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
-  background-image:
-    linear-gradient(45deg, #eee 25%, transparent 0, transparent 75%, #eee 0, #eee),
-    linear-gradient(45deg, #eee 25%, #fff 0, #fff 75%, #eee 0, #eee);
+  background-image: linear-gradient(
+      45deg,
+      var(--square-color) 25%,
+      #0000 25%,
+      #0000 75%,
+      var(--square-color) 75%,
+      var(--square-color)
+    ),
+    linear-gradient(
+      45deg,
+      var(--square-color) 25%,
+      #0000 25%,
+      #0000 75%,
+      var(--square-color) 75%,
+      var(--square-color)
+    );
 }
 
 .step1-left {

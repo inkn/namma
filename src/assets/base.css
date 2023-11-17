@@ -42,6 +42,7 @@
   --color-text-main: #697b8c;
   --layout-max-width: 1314px;
   --color-ant-bg: #fff;
+  --square-color: #cccccc91;
 }
 
 @media (prefers-color-scheme: dark) {
