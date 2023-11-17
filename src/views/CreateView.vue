@@ -15,7 +15,7 @@
         <a-steps changeable :current="currentStep" @change="setCurrentStep">
           <a-step v-for="item in STEPS">{{ item }}</a-step>
         </a-steps>
-        <a-button type="primary" @click="setCurrentStep(currentStep + 1)">下一步</a-button>
+        <a-button type="primary" v-if="currentStep < STEPS.length" @click="setCurrentStep(currentStep + 1)">下一步</a-button>
       </div>
     </div>
     <div class="create-content">

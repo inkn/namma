@@ -4,6 +4,7 @@ import { ref } from "vue";
 
 
 const viewRef = ref<any>(null)
+const inputRef = ref<any>(null)
 
 
 const props = defineProps({
@@ -48,6 +49,12 @@ const updateSvg = () => {
 
 onMounted(() => {
     updateSvg()
+
+    setTimeout(() => {
+        if (layer.value?.isEdit) {
+            inputRef.value?.focus()
+        }
+    }, 100)
 })
 
 
@@ -70,7 +77,7 @@ onMounted(() => {
             viewBox="0 0 720 720"></svg>
     </div>
     <div class="name"><span v-if="!layer.isEdit">{{ layer.name }}</span>
-        <a-input v-else v-model="layer.name" @blur="layer.isEdit = false" />
+        <a-input ref="inputRef" v-else v-model="layer.name" @blur="layer.isEdit = false"  />
     </div>
     <icon-eye-invisible class="my-icon" v-if="!layer.visible" @click.stop="toggleVisible(layer)" />
     <icon-eye class="my-icon" v-else @click.stop="toggleVisible(layer)" />
