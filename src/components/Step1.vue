@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import initCanvas from "@/utils/setup.js";
 import { onMounted } from 'vue';
 import { useCanvasStore } from '@/stores/canvas';
-import Layer from '@/components/Layer.vue';
+import Layer from '@/components/Layer/Layer.vue';
 import { watch } from 'vue';
 
 const canvas = ref<HTMLCanvasElement>()

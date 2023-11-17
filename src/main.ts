@@ -29,4 +29,5 @@ app.mount('#app')
 
 window.app = app;
 window.eventBus = new EventBus();
+window.layerSvgMap = {};
 

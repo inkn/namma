@@ -8,6 +8,7 @@ import { ref } from "vue";
 import { onMounted } from "vue";
 import { nextTick } from "vue";
 import draggable from 'vuedraggable'
+import LayerItem from "./LayerItem.vue";
 
 
 const layerInfo = ref<any>({ updateTimer: 1, list: [] })
@@ -105,18 +106,7 @@ defineExpose({
       <draggable v-model="layerInfo.list" item-key="id" @change="onLayerIndexChange()">
          <template #item="{ element: item }">
                <div class="layer" :class="{ active: curActiveLayerId === item.id }" @click="activate(item)">
-                  <div class="v-layer-item-bg">
-                     <svg ref="view" xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20"
-                        viewBox="0 0 1920 1080"></svg>
-                  </div>
-                  <div class="name"><span v-if="!item.isEdit">{{ item.name }}</span>
-                     <a-input v-else v-model="item.name" @blur="item.isEdit = false" />
-                  </div>
-                  <icon-eye-invisible class="my-icon" v-if="!item.visible" @click.stop="toggleVisible(item)" />
-                  <icon-eye class="my-icon" v-else @click.stop="toggleVisible(item)" />
-                  <icon-eye class="my-icon" v-else @click.stop="toggleVisible(item)" />
-                  <icon-edit class="my-icon" @click="edit(item)" />
-                  <icon-delete class="my-icon" @click="remove(item)" />
+                  <LayerItem :layer="item" :toggleVisible="toggleVisible" :edit="edit" :remove="remove" />
                </div>
          </template>
       </draggable>

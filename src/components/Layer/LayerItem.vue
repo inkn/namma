@@ -1,0 +1,139 @@
+<script setup lang="ts">
+import { onMounted, toRefs } from "vue";
+import { ref } from "vue";
+
+
+const viewRef = ref<any>(null)
+
+
+const props = defineProps({
+    layer: {
+        type: Object,
+        default: () => ({})
+    },
+    toggleVisible: {
+        type: Function,
+        default: () => { }
+    },
+    edit: {
+        type: Function,
+        default: () => { }
+    },
+    remove: {
+        type: Function,
+        default: () => { }
+    }
+})
+
+const { layer } = toRefs(props)
+
+const updateSvg = () => {
+    if (!layer.value || !viewRef.value) {
+        return
+    }
+    const svg = layer.value.exportSVG()
+    if (layer.value.visible) {
+        viewRef.value.innerHTML = ""
+        viewRef.value.appendChild(svg)
+        layer.value.lastSvg = svg
+        return
+    }
+
+    if (layer.value?.lastSvg) {
+        viewRef.value.innerHTML = ""
+        viewRef.value?.appendChild(layer.value?.lastSvg)
+    }
+   
+}
+
+onMounted(() => {
+    updateSvg()
+})
+
+
+// window.eventBus.on("updateLayers", () => {
+//     nextTick(() => {
+//         if ( !layer.value) {
+//             return
+//         }
+//         innerSvg.value = layer.value.exportSVG()
+//     })
+
+// })
+
+
+</script>
+
+<template>
+    <div class="v-layer-item-bg">
+        <svg ref="viewRef" xmlns="http://www.w3.org/2000/svg" version="1.1" width="72" height="72"
+            viewBox="0 0 720 720"></svg>
+    </div>
+    <div class="name"><span v-if="!layer.isEdit">{{ layer.name }}</span>
+        <a-input v-else v-model="layer.name" @blur="layer.isEdit = false" />
+    </div>
+    <icon-eye-invisible class="my-icon" v-if="!layer.visible" @click.stop="toggleVisible(layer)" />
+    <icon-eye class="my-icon" v-else @click.stop="toggleVisible(layer)" />
+    <icon-eye class="my-icon" v-else @click.stop="toggleVisible(layer)" />
+    <icon-edit class="my-icon" @click="edit(layer)" />
+    <icon-delete class="my-icon" @click="remove(layer)" />
+</template>
+<style scoped>
+.v-layer-item-bg {
+    width: 72px;
+    height: 72px;
+    --square-color: #ccc;
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 5px;
+    background-image:
+        linear-gradient(45deg, #eee 25%, transparent 0, transparent 75%, #eee 0, #eee),
+        linear-gradient(45deg, #eee 25%, #fff 0, #fff 75%, #eee 0, #eee);
+    border-radius: 2px;
+}
+
+.layers {
+    width: 100%;
+    height: calc(430px - 80px);
+    overflow-y: auto;
+}
+
+.my-icon {
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    color: rgb(78, 89, 105);
+    font-style: normal;
+    vertical-align: -2px;
+    outline: none;
+    stroke: currentColor;
+}
+
+.layer {
+    display: flex;
+    align-items: center;
+    height: 72px;
+    margin-top: 16px;
+
+}
+
+.layer:first-child {
+    margin-top: 0;
+}
+
+.name {
+    width: 300px;
+    margin-left: 10px;
+}
+
+.active {
+    FONT-VARIANT: JIS04;
+    color: rgb(0, 0, 0);
+    /* border: 1px solid rgb(0, 0, 0); */
+    flex-shrink: 0;
+    border-radius: 8px 8px 0px 0px;
+    background: #F8F8F8;
+}
+</style>
